@@ -2,9 +2,9 @@ package com.microservicio.backend_hospital.service.SignosVitales;
 
 import java.util.List;
 
-import com.microservicio.backend_hospital.model.SignosVitalesPacienteEntity;
+import com.microservicio.backend_hospital.model.SignosVitales;
 
 public interface SignosVitalesService {
-    List<SignosVitalesPacienteEntity> getAllSignosVitalesPacientes();
+    List<SignosVitales> getAllSignosVitalesPacientes();
 
 }
