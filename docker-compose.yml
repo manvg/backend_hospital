@@ -1,0 +1,32 @@
+services:
+  backend_hospital:
+    image: ms-backend_hospital
+    container_name: backend_hospital
+    ports:
+      - "8085:8085"
+    environment:
+      # Configuración de Oracle Cloud
+      SPRING_DATASOURCE_URL: "jdbc:oracle:thin:@qhkv1hxjx2pk6k3q_tp?TNS_ADMIN=${TNS_ADMIN}"
+      SPRING_DATASOURCE_USERNAME: "USUARIOMICROSERVICIO"
+      SPRING_DATASOURCE_PASSWORD: "UsuarioMicro123"
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: "oracle.jdbc.OracleDriver"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: "org.hibernate.dialect.OracleDialect"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: "none"
+
+      # Configuración de HikariCP (pool de conexiones)
+      SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE: "10"
+      SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT: "30000"
+
+      # Ruta de la Oracle Wallet (ya copiada dentro del contenedor)
+      TNS_ADMIN: "/app/wallet"
+
+    volumes:
+      - /ruta/local/wallet:/app/wallet 
+
+    restart: always
+    networks:
+      - kafka_kafka-net
+
+networks:
+  kafka_kafka-net:
+    external: true
